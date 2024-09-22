@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id            Int           @id @default(autoincrement())
+  category_name String        @unique @db.VarChar(100)
+  detailssounds DetailSound[]
+}
+
+model ImageCover {
+  id            Int           @id @default(autoincrement())
+  img_url       String        @db.VarChar(255)
+  description   String?
+  detailssounds DetailSound[]
+}
+
+model Sound {
+  id            Int           @id @default(autoincrement())
+  name          String        @db.VarChar(255)
+  detailssounds DetailSound[]
+}
+
+model DetailSound {
+  id           Int         @id @default(autoincrement())
+  name         String      @unique @db.VarChar(255)
+  url_youtube  String?     @db.VarChar(255)
+  url_command  String?     @db.VarChar(255)
+  date         DateTime    @db.Timestamp(6)
+  likes        Int         @default(0)
+  duration     String?     @db.VarChar(50)
+  categoryId   Int
+  imageCoverId Int?
+  soundId      Int
+  category     Category    @relation(fields: [categoryId], references: [id])
+  image_cover  ImageCover? @relation(fields: [imageCoverId], references: [id])
+  sound        Sound       @relation(fields: [soundId], references: [id])
+}
