@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ImageCoverService } from './image-cover.service';
 import { CreateImageCoverDto } from './dto/create-image-cover.dto';
 import { UpdateImageCoverDto } from './dto/update-image-cover.dto';
@@ -23,7 +31,10 @@ export class ImageCoverController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateImageCoverDto: UpdateImageCoverDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateImageCoverDto: UpdateImageCoverDto,
+  ) {
     return this.imageCoverService.update(+id, updateImageCoverDto);
   }
 
