@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSoundDto } from './dto/create-sound.dto';
 import { UpdateSoundDto } from './dto/update-sound.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class SoundService {
+
+  constructor( private prisma: PrismaService ){}
+
+  getAllSounds(){
+    return this.prisma.sound.findMany();
+  }
+
   create(createSoundDto: CreateSoundDto) {
     return 'This action adds a new sound';
   }
