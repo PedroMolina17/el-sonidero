@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ImageCoverService } from './image-cover.service';
 import { CreateImageCoverDto } from './dto/create-image-cover.dto';
 import { UpdateImageCoverDto } from './dto/update-image-cover.dto';
@@ -14,21 +22,24 @@ export class ImageCoverController {
 
   @Get()
   findAll() {
-    return this.imageCoverService.findAll();
+    return this.imageCoverService.getAllImageCovers();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.imageCoverService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.imageCoverService.getImageCoverById(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateImageCoverDto: UpdateImageCoverDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateImageCoverDto: UpdateImageCoverDto,
+  ) {
     return this.imageCoverService.update(+id, updateImageCoverDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.imageCoverService.remove(+id);
   }
 }

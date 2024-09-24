@@ -14,12 +14,12 @@ export class DetailSoundController {
 
   @Get()
   findAll() {
-    return this.detailSoundService.findAll();
+    return this.detailSoundService.getAllDetailSounds();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.detailSoundService.findOne(+id);
+    return this.detailSoundService.getDetailSoundById(+id);
   }
 
   @Patch(':id')

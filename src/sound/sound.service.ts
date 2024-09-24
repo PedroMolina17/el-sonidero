@@ -2,33 +2,35 @@ import { Injectable } from '@nestjs/common';
 import { CreateSoundDto } from './dto/create-sound.dto';
 import { UpdateSoundDto } from './dto/update-sound.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { Sound } from '@prisma/client';
 
 @Injectable()
 export class SoundService {
 
-  constructor( private prisma: PrismaService ){}
+  constructor( private prismaService: PrismaService ){}
 
-  getAllSounds(){
-    return this.prisma.sound.findMany();
+  async create(createSoundDto: CreateSoundDto){
+    return await this.prismaService.sound.create({
+      data: createSoundDto
+    });
   }
 
-  create(createSoundDto: CreateSoundDto) {
-    return 'This action adds a new sound';
+  async getAllSounds(): Promise<Sound[]>{
+    return await this.prismaService.sound.findMany();
   }
 
-  findAll() {
-    return `This action returns all sound`;
+  async getSoundById( id: number ): Promise<Sound> {
+    return await this.prismaService.sound.findUnique({ where: { id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sound`;
+  async update(id: number, updateSoundDto: UpdateSoundDto) {
+    return await this.prismaService.sound.update({
+      where: { id },
+      data: updateSoundDto,
+    })
   }
 
-  update(id: number, updateSoundDto: UpdateSoundDto) {
-    return `This action updates a #${id} sound`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} sound`;
+  async remove(id: number) {
+    return await this.prismaService.sound.delete({ where: { id } });
   }
 }

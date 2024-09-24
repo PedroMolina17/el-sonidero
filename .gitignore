@@ -1,7 +1,7 @@
 
 .env
 
-postgres/
+/postgres/
 
 # compiled output
 /dist

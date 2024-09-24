@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateImageCoverDto } from './dto/create-image-cover.dto';
 import { UpdateImageCoverDto } from './dto/update-image-cover.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { ImageCover } from '@prisma/client';
 
 @Injectable()
 export class ImageCoverService {
-  create(createImageCoverDto: CreateImageCoverDto) {
-    return 'This action adds a new imageCover';
+
+
+  constructor( private readonly prismaService: PrismaService){}
+
+  async create(createImageCoverDto: CreateImageCoverDto) {
+    return await this.prismaService.imageCover.create({
+      data: createImageCoverDto,
+    })
   }
 
-  findAll() {
-    return `This action returns all imageCover`;
+  async getAllImageCovers(): Promise<ImageCover[]> {
+    return await this.prismaService.imageCover.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} imageCover`;
+  async getImageCoverById(id: number): Promise<ImageCover> {
+    return await this.prismaService.imageCover.findUnique({ where: { id } });
   }
 
-  update(id: number, updateImageCoverDto: UpdateImageCoverDto) {
-    return `This action updates a #${id} imageCover`;
+  async update(id: number, updateImageCoverDto: UpdateImageCoverDto) {
+    return await this.prismaService.imageCover.update({
+      where: { id },
+      data: updateImageCoverDto,
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} imageCover`;
+  async remove(id: number) {
+    return await this.prismaService.imageCover.delete({ where: { id } });
   }
 }
