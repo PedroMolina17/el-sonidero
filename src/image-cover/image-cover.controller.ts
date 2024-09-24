@@ -22,12 +22,12 @@ export class ImageCoverController {
 
   @Get()
   findAll() {
-    return this.imageCoverService.findAll();
+    return this.imageCoverService.getAllImageCovers();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.imageCoverService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.imageCoverService.getImageCoverById(+id);
   }
 
   @Patch(':id')
@@ -39,7 +39,7 @@ export class ImageCoverController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.imageCoverService.remove(+id);
   }
 }

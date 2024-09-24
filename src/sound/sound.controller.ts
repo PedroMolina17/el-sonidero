@@ -14,12 +14,12 @@ export class SoundController {
 
   @Get()
   findAll() {
-    return this.soundService.findAll();
+    return this.soundService.getAllSounds();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.soundService.findOne(+id);
+    return this.soundService.getSoundById(+id);
   }
 
   @Patch(':id')
