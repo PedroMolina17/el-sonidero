@@ -13,33 +13,23 @@ import { SoundService } from './sound.service';
 import { CreateSoundDto } from './dto/create-sound.dto';
 import { UpdateSoundDto } from './dto/update-sound.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
-
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 @Controller('sound')
 export class SoundController {
-  constructor(private readonly soundService: SoundService) {}
+  constructor(
+    private readonly soundService: SoundService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @Post()
-  @UseInterceptors(
-    FileInterceptor('sound_url', {
-      storage: diskStorage({
-        destination: './uploads/sounds',
-        filename: (req, file, callback) => {
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
-          const filename = `sound-${uniqueSuffix}${ext}`;
-          callback(null, filename);
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor('sound_url'))
   async create(
     @UploadedFile() file: Express.Multer.File,
     @Body() createSoundDto: CreateSoundDto,
   ) {
-    const fileUrl = `/sounds/${file.filename}`;
+    console.log('Archivo recibido:', file);
+    const uploadResult = await this.cloudinaryService.uploadFile(file);
+    const fileUrl = uploadResult.secure_url;
 
     createSoundDto.name = fileUrl;
 

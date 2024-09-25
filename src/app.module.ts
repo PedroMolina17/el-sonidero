@@ -6,6 +6,7 @@ import { SoundModule } from './sound/sound.module';
 import { DetailSoundModule } from './detail-sound/detail-sound.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
     }),
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [],
