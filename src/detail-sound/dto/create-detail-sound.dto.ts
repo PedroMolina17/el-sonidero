@@ -1,32 +1,27 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
-
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateDetailSoundDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    name: string;
+  @IsString()
+  url_youtube: string;
 
-    @IsString()
-    url_youtube: string;
+  @IsString()
+  url_command: string;
 
-    @IsString()
-    url_comand: string;
+  @IsNumber()
+  likes: number;
 
-    @IsDate()
-    date: Date;
+  @IsString()
+  duration: string;
 
-    @IsNumber()
-    likes: number;
+  @IsNumber()
+  categoryId: number;
 
-    @IsString()
-    duration: string;
+  @IsNumber()
+  imageCoverId: number;
 
-    @IsNumber()
-    categoryId: number;
-
-    @IsNumber()
-    imageCoverId: number;
-
-    @IsNumber()
-    soundId: number;
+  @IsNumber()
+  soundId: number;
 }

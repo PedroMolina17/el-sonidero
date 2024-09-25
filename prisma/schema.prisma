@@ -38,7 +38,7 @@ model DetailSound {
   name         String      @unique @db.VarChar(255)
   url_youtube  String?     @db.VarChar(255)
   url_command  String?     @db.VarChar(255)
-  date         DateTime    @db.Timestamp(6)
+  date         DateTime    @default(now())
   likes        Int         @default(0)
   duration     String?     @db.VarChar(50)
   categoryId   Int

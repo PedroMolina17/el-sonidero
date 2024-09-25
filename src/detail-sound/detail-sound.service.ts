@@ -6,9 +6,8 @@ import { DetailSound } from '@prisma/client';
 
 @Injectable()
 export class DetailSoundService {
+  constructor(private readonly prismaService: PrismaService) {}
 
-  constructor( private readonly prismaService: PrismaService ){}
-  
   async create(createDetailSoundDto: CreateDetailSoundDto) {
     return await this.prismaService.detailSound.create({
       data: createDetailSoundDto,
@@ -16,21 +15,23 @@ export class DetailSoundService {
   }
 
   async getAllDetailSounds(): Promise<DetailSound[]> {
-    return await this.prismaService.detailSound.findMany();
+    return await this.prismaService.detailSound.findMany({
+      include: { sound: true },
+    });
   }
 
   async getDetailSoundById(id: number): Promise<DetailSound> {
-    return await this.prismaService.detailSound.findUnique({ where: { id }});
+    return await this.prismaService.detailSound.findUnique({ where: { id } });
   }
 
   async update(id: number, updateDetailSoundDto: UpdateDetailSoundDto) {
     return await this.prismaService.detailSound.update({
       where: { id },
-      data: updateDetailSoundDto
-    })
+      data: updateDetailSoundDto,
+    });
   }
 
   async remove(id: number) {
-    return await this.prismaService.detailSound.delete({ where: { id }});
+    return await this.prismaService.detailSound.delete({ where: { id } });
   }
 }

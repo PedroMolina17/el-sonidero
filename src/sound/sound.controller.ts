@@ -39,7 +39,7 @@ export class SoundController {
     @UploadedFile() file: Express.Multer.File,
     @Body() createSoundDto: CreateSoundDto,
   ) {
-    const fileUrl = `/uploads/sounds/${file.filename}`;
+    const fileUrl = `/sounds/${file.filename}`;
 
     createSoundDto.name = fileUrl;
 
