@@ -1,4 +1,4 @@
 export class Sound {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }
