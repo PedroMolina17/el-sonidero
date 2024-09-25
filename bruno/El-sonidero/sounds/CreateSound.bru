@@ -1,0 +1,15 @@
+meta {
+  name: CreateSound
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:4000/sound/1
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  sound_url: @file(C:\Users\Usuario\Downloads\Music\Plants vs Zombies Soundtrack. [Main Menu] (320).mp3)
+}
