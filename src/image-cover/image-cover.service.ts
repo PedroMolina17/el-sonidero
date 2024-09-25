@@ -6,14 +6,12 @@ import { ImageCover } from '@prisma/client';
 
 @Injectable()
 export class ImageCoverService {
-
-
-  constructor( private readonly prismaService: PrismaService){}
+  constructor(private readonly prismaService: PrismaService) {}
 
   async create(createImageCoverDto: CreateImageCoverDto) {
     return await this.prismaService.imageCover.create({
       data: createImageCoverDto,
-    })
+    });
   }
 
   async getAllImageCovers(): Promise<ImageCover[]> {
@@ -28,7 +26,7 @@ export class ImageCoverService {
     return await this.prismaService.imageCover.update({
       where: { id },
       data: updateImageCoverDto,
-    })
+    });
   }
 
   async remove(id: number) {

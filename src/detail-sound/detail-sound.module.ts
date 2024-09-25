@@ -6,7 +6,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 @Module({
   controllers: [DetailSoundController],
   providers: [DetailSoundService],
-  imports: [PrismaModule]
+  imports: [PrismaModule],
 })
-
 export class DetailSoundModule {}

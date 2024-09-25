@@ -6,20 +6,19 @@ import { Sound } from '@prisma/client';
 
 @Injectable()
 export class SoundService {
+  constructor(private prismaService: PrismaService) {}
 
-  constructor( private prismaService: PrismaService ){}
-
-  async create(createSoundDto: CreateSoundDto){
+  async create(createSoundDto: CreateSoundDto) {
     return await this.prismaService.sound.create({
-      data: createSoundDto
+      data: createSoundDto,
     });
   }
 
-  async getAllSounds(): Promise<Sound[]>{
+  async getAllSounds(): Promise<Sound[]> {
     return await this.prismaService.sound.findMany();
   }
 
-  async getSoundById( id: number ): Promise<Sound> {
+  async getSoundById(id: number): Promise<Sound> {
     return await this.prismaService.sound.findUnique({ where: { id } });
   }
 
@@ -27,7 +26,7 @@ export class SoundService {
     return await this.prismaService.sound.update({
       where: { id },
       data: updateSoundDto,
-    })
+    });
   }
 
   async remove(id: number) {
