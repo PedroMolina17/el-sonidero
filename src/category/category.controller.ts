@@ -11,6 +11,7 @@ import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
+
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
@@ -22,12 +23,12 @@ export class CategoryController {
 
   @Get()
   async findAll() {
-    return await this.categoryService.findAll();
+    return await this.categoryService.getAllCategories();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: number) {
-    return await this.categoryService.findOne(id);
+    return await this.categoryService.getCategoryById(id);
   }
 
   @Patch(':id')
