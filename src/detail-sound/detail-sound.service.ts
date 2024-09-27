@@ -24,6 +24,11 @@ export class DetailSoundService {
     return await this.prismaService.detailSound.findUnique({ where: { id } });
   }
 
+  async getDetailSoundByName(name: string): Promise<DetailSound> {
+    return await this.prismaService.detailSound.findFirst({
+      where: { name: name },
+    });
+  }
   async update(id: number, updateDetailSoundDto: UpdateDetailSoundDto) {
     return await this.prismaService.detailSound.update({
       where: { id },

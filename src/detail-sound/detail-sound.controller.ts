@@ -30,6 +30,11 @@ export class DetailSoundController {
     return this.detailSoundService.getDetailSoundById(+id);
   }
 
+  @Get('/name/:name')
+  findByName(@Param('name') name: string) {
+    return this.detailSoundService.getDetailSoundByName(name);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
