@@ -1,0 +1,16 @@
+
+services:
+  db:
+    container_name: postgres_sonideroDB
+    image: postgres:16.3
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=sonideroDB
+    restart: always
+    ports:
+      - "5433:5432"
+    
+  

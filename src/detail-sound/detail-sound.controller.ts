@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DetailSoundService } from './detail-sound.service';
 import { CreateDetailSoundDto } from './dto/create-detail-sound.dto';
 import { UpdateDetailSoundDto } from './dto/update-detail-sound.dto';
@@ -14,16 +22,24 @@ export class DetailSoundController {
 
   @Get()
   findAll() {
-    return this.detailSoundService.findAll();
+    return this.detailSoundService.getAllDetailSounds();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.detailSoundService.findOne(+id);
+    return this.detailSoundService.getDetailSoundById(+id);
+  }
+
+  @Get('/name/:name')
+  findByName(@Param('name') name: string) {
+    return this.detailSoundService.getDetailSoundByName(name);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDetailSoundDto: UpdateDetailSoundDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateDetailSoundDto: UpdateDetailSoundDto,
+  ) {
     return this.detailSoundService.update(+id, updateDetailSoundDto);
   }
 

@@ -1,1 +1,3 @@
-export class CreateSoundDto {}
+export class CreateSoundDto {
+  name: string;
+}

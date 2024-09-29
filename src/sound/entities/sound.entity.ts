@@ -1,1 +1,4 @@
-export class Sound {}
+export class Sound {
+  id: number;
+  name: string;
+}
