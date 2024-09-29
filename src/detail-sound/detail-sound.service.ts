@@ -26,7 +26,13 @@ export class DetailSoundService {
 
   async getDetailSoundByName(name: string): Promise<DetailSound> {
     return await this.prismaService.detailSound.findFirst({
-      where: { name: name },
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+      },
+      include: { sound: true },
     });
   }
   async update(id: number, updateDetailSoundDto: UpdateDetailSoundDto) {
